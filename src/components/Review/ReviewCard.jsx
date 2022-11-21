@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewItem from './ReviewItem.jsx';
 
-import { Text, ReviewContainer, ReviewList } from './ReviewCard.styled.js';
+import { ReviewContainer, ReviewList } from './ReviewCard.styled.js';
 
 export default function ReviewCard({ reviews }) {
   return (

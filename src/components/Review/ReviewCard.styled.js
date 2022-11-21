@@ -18,7 +18,3 @@ export const ReviewsTitle = styled.h1`
 export const ReviewsText = styled.p`
   font-size: 14px;
 `;
-
-export const Text = styled.span`
-  padding-left: 20px;
-`;
