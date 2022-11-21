@@ -1,15 +1,16 @@
-import React from 'react';
 import TrendingItem from './TrendingItem';
+
+import { TrendingTitle, TrendingList } from './TrendingMovies.styled';
+
 export default function TrendingMovies({ movies }) {
   return (
-    <ul>
-      {movies.map(movie => (
-        <TrendingItem
-          key={movie.id}
-          moviesId={movie.id}
-          moviesTitle={movie.original_title}
-        />
-      ))}
-    </ul>
+    <div>
+      <TrendingTitle>Trending today</TrendingTitle>
+      <TrendingList>
+        {movies.map(({ id, original_title }) => (
+          <TrendingItem key={id} id={id} original_title={original_title} />
+        ))}
+      </TrendingList>
+    </div>
   );
 }

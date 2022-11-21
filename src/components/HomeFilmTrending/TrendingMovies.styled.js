@@ -1,23 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
-  gap: 16px;
+export const TrendingTitle = styled.h1`
+  font-size: 50px;
+  margin-bottom: 30px;
 `;
 
-export const CardWrapper = styled.div`
-  border: 1px solid black;
-  border-radius: 4px;
-
-  > a {
-    text-decoration: none;
-  }
-`;
-
-export const MovieName = styled.h3`
-  padding: 4px;
-  margin-top: 8px;
-  margin-bottom: 0;
-  color: black;
+export const TrendingList = styled.ul`
+  display: inline-block;
+  list-style: none;
 `;

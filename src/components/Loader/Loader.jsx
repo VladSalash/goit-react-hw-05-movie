@@ -1,4 +1,3 @@
-// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import React from 'react';
 import { BallTriangle } from 'react-loader-spinner';
 import { Spinner } from './Loader.styled';

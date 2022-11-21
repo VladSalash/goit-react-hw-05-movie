@@ -1,34 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
-import { fetchSearchMovies } from '../api/api.js';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { getMovieByKeyWord } from '../api/api.js';
+import SearchMovies from '../components/SearchMovie/SearchMovies';
 
 import Form from '../components/FormSearchMovie/Form';
 
-export default function Movies() {
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
+const Movies = () => {
+  const [movies, setMovies] = useState([]);
+  const [status, setStatus] = useState('idle');
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [, setMovieList] = useState(null);
+  const location = useLocation();
   const query = searchParams.get('query');
 
   useEffect(() => {
-    if (query !== null) {
-      setSearchQuery(query);
-      fetchSearchMovies(query).then(res => {
-        setMovieList(res.data.results);
-      });
+    if (query === null) {
+      return;
     }
+    setStatus(Status.PENDING);
+
+    const fetchMovie = async () => {
+      try {
+        const getMovies = await getMovieByKeyWord(query);
+
+        if (getMovies.length === 0) {
+          setStatus(Status.IDLE);
+          return toast.warning(` ${query} not found :( `);
+        }
+
+        setStatus(Status.RESOLVED);
+        setMovies(getMovies);
+      } catch (error) {
+        setStatus(Status.REJECTED);
+        return toast.error(`Whoops something went wrong...`);
+      }
+    };
+    fetchMovie();
   }, [query]);
 
-  setSearchParams(`query=${searchQuery}`);
-
-  fetchSearchMovies(searchQuery).then(res => {
-    setMovieList(res.data.results);
-  });
-
   return (
-    <div>
-      <Form />
-    </div>
+    <>
+      <Form setSearchParams={setSearchParams} />
+      {status === Status.RESOLVED && (
+        <SearchMovies movies={movies} location={location} />
+      )}
+    </>
   );
-}
+};
+export default Movies;

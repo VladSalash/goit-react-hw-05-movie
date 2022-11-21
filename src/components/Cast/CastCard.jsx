@@ -1,18 +1,20 @@
 import React from 'react';
-import { CastList } from './CastCard.styled.js';
+import { CastContainer, CastList } from './CastCard.styled.js';
 import CastItems from './CastItem.jsx';
+
 export default function CastCard({ cast }) {
   return (
-    <CastList>
-      {cast.map(item => (
-        <CastItems
-          key={item.id}
-          original={item.original_name}
-          profile={item.profile_path}
-          name={item.name}
-          character={item.character}
-        />
-      ))}
-    </CastList>
+    <CastContainer>
+      <CastList>
+        {cast.map(({ cast_id, profile_path, name, character }) => (
+          <CastItems
+            key={cast_id}
+            profile_path={profile_path}
+            name={name}
+            character={character}
+          />
+        ))}
+      </CastList>
+    </CastContainer>
   );
 }

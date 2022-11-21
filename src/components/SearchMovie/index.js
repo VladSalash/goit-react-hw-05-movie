@@ -1,1 +1,1 @@
-// export { default } from './SearchMovies.jsx';
+export { default } from './SearchMovies.jsx';

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export default function TrendingItem({ key, moviesId, moviesTitle }) {
+export default function TrendingItem({ id, original_title }) {
   return (
-    <li key={key}>
-      <Link to={`/movies/${moviesId}`}>{moviesTitle}</Link>
+    <li key={id}>
+      <NavLink to={`movies/${id}`}>{original_title}</NavLink>
     </li>
   );
 }

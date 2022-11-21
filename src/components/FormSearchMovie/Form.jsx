@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { fetchSearchMovies } from '../../api/api.js';
-import SearchMovies from '../SearchMovie/SearchMovies';
+import { useState } from 'react';
 
-export default function Form() {
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export default function Form({ setSearchParams }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [movieList, setMovieList] = useState(null);
 
   const handleChange = e => {
     setSearchQuery(e.currentTarget.value);
   };
 
   const handleSubmit = e => {
+    const form = e.currentTarget;
     e.preventDefault();
-    if (searchQuery.trim() === '') {
-      return;
+    if (searchQuery.toLowerCase().trim() === '') {
+      return toast.info('Please enter movie name ');
     }
+    setSearchParams({ query: form.elements.query.value });
+    setSearchQuery('');
   };
 
-  fetchSearchMovies(searchQuery).then(res => {
-    setMovieList(res.data.results);
-  });
   const input = {
     paddingLeft: 20,
   };
@@ -29,13 +29,12 @@ export default function Form() {
       <form onSubmit={handleSubmit} autoComplete="off" style={input}>
         <input
           type="text"
-          name="searchQuery"
+          name="query"
           onChange={handleChange}
           value={searchQuery}
         ></input>
         <button type="submit">Search</button>
       </form>
-      <div>{movieList && <SearchMovies movieList={movieList} />}</div>
     </div>
   );
 }

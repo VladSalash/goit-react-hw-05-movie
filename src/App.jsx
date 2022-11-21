@@ -1,5 +1,8 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navigation from './components/Navigation';
 import Container from './components/Container';
@@ -29,6 +32,7 @@ export const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <ToastContainer autoClose={3000} />
     </Container>
   );
 };

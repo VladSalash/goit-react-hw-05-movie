@@ -1,9 +1,9 @@
-import React from 'react';
-export default function ReviewItem({ key, author, content }) {
+import { RevItem, ReviewsTitle, ReviewsText } from './ReviewCard.styled.js';
+export default function ReviewItem({ author, content }) {
   return (
-    <li key={key}>
-      <h3>{author}</h3>
-      <p>{content}</p>
-    </li>
+    <RevItem key={author}>
+      <ReviewsTitle>{author}</ReviewsTitle>
+      <ReviewsText>{content}</ReviewsText>
+    </RevItem>
   );
 }
